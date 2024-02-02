@@ -400,6 +400,7 @@ impl Bindings {
         P: AsRef<Path>,
     {
         if self.write {
+            let out = std::path::Path::new(&std::env::var("OUT_DIR").unwrap()).to_path_buf().join(out);
             let mut file = std::fs::File::create(out).expect("Create lib in {out}");
             for kernel_path in &self.paths {
                 let name = kernel_path
